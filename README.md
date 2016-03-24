@@ -1,4 +1,6 @@
 # EchoToEventGhost
+Thread: http://www.eventghost.net/forum/viewtopic.php?f=2&t=7429
+
 If you are like me, you have been using EventGhost for home automation because you want the customized control this platform allows. Or you are nuts and spend your nights writing code only you will ever see and use. If this is you, you may also have an Amazon Echo seating in the kitchen. Now this $180 kitchen timer is great, but it can do so much more. Now with this new skill, you can pass any spoken command to EventGhost where this intent becomes actionable.
 
 This is a simple AWS Lambda node.js script that packages up the Alexa Skills Kit Intent and will post any spoken command to your EventGhost Webserver as an Event with a payload.
@@ -25,9 +27,6 @@ https://developer.amazon.com/public/sol ... a-function Get the Color Game demo w
 6. Use the sample the two sample files for the IntentSchema and Utterances.
 
 7. You will most likely need to port forward from your router to your EG webserver.
-
-********
-v2 Only
 
 8. Add the index.html to your Webserver path. Note the {{bb_response}} in the text is for a Temporary variable that needs to be set in an EG Macro
 
