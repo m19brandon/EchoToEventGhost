@@ -1,0 +1,9 @@
+{
+  "intents": [ {
+    "intent": "PerformAction",
+    "slots": [ {
+       "name": "Action",
+       "type": "LITERAL"
+    } ]
+  } ]
+}

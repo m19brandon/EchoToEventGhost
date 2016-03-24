@@ -1,0 +1,28 @@
+{
+  "session": {
+    "sessionId": "session1234",
+    "application": {
+      "applicationId": "enter your app id here"
+    },
+    "attributes": null,
+    "user": {
+      "userId": null
+    },
+    "new": true
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "request5678",
+    "timestamp": 1442099325070,
+    "intent": {
+      "name": "PerformAction",
+      "slots": {
+        "Action": {
+          "name": "Action",
+          "value": "I would like a sandwich"
+        }
+      }
+    },
+    "reason": null
+  }
+}
