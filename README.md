@@ -42,8 +42,6 @@ entities: {u'action': [{u'type': u'value', u'value': u'off'}], u'channel': [{u's
 Trigger: ip2ir_Family_All_Power_Off
 Return Msg: turning off the family room tv
 
-
 Examples:
-
 "Alexa, Tell INVOCATION_NAME to change the channel to ESPN"
 "Alexa, Tell INVOCATION_NAME to turn off the bedroom lights"
