@@ -6,6 +6,9 @@ var http = require('http');
 var EG_ip = '127.0.0.0';
 var EG_Port = '80';
 var EG_Event = 'EchoToEG';
+//Leave user and password blank if Basic Auth is not used on the EventGhost WebServer
+var EG_user = '';
+var EG_password = '';
 
 var Echo_App_ID = "amzn1.echo-sdk-ams.app.############";
 
@@ -112,12 +115,24 @@ function callEchoToEG(intent, session, callback)
     console.log("callEchoToEG - Intent = " + setActionURI);
 
 
-// Options indicating where we should send the request to.
-    var get_options = {
-        host: EG_ip,
-        port: EG_Port,
-        path: 'index.html?' + EG_Event + '&' + setActionURI
-    };
+// Options included where we should send the request to with or without basic auth
+    var EG_uri = '/index.html?' + EG_Event + '&' + setActionURI;
+    if (EG_user === '') {
+        var get_options = {
+            host: EG_ip,
+            port: EG_Port,
+            path: EG_uri
+        };
+    } else {
+        var get_options = {
+            host: EG_ip,
+            port: EG_Port,
+            path: EG_uri,
+            headers: {
+                'Authorization': 'Basic ' + new Buffer(EG_user + ':' + EG_password).toString('base64')
+            }
+        };
+    }
   
     console.log("Sending request to " + get_options.host + ":" + get_options.port + get_options.path);
     // Set up the request
@@ -130,30 +145,34 @@ function callEchoToEG(intent, session, callback)
             eg_results += chunk;
         });
         res.on('end', function () {
-            console.log('Body: ' + eg_results);
-            //Parse the Body results from EG, if the command was unknow we will repromt
-            if((eg_results.indexOf('intent: UNKNOWN') > -1)||(eg_results.indexOf('cmd is unknown:') > -1)) {
-                console.log('callEchoToEG - Results were a unknown command, we will reprompt');
-                speechOutput = "Sorry but I did not understand, " +setAction + ", please try again";
-                shouldEndSession=false;
-            } else {
-                console.log('callEchoToEG - Results were a known command, all is good');
-                if(eg_results.indexOf('Return Msg: ') > -1) {
-                    var lines = eg_results.split('\n');
-                    for(var i = 0;i < lines.length;i++){
-                        if(lines[i].indexOf('Return Msg: ') > -1) {
-                            var rtn_msg = lines[i].split('Msg:')[1].trim();
-                            if (rtn_msg !== '') {
-                                setAction = rtn_msg;
+            if (res.statusCode === 200) {
+                console.log('Body: ' + eg_results);
+                //Parse the Body results from EG, if the command was unknow we will repromt
+                if((eg_results.indexOf('intent: UNKNOWN') > -1)||(eg_results.indexOf('cmd is unknown:') > -1)) {
+                    console.log('callEchoToEG - Results were a unknown command, we will reprompt');
+                    speechOutput = "Sorry but I did not understand, " +setAction + ", please try again";
+                    shouldEndSession=false;
+                } else {
+                    console.log('callEchoToEG - Results were a known command, all is good');
+                    if(eg_results.indexOf('Return Msg: ') > -1) {
+                        var lines = eg_results.split('\n');
+                        for(var i = 0;i < lines.length;i++){
+                            if(lines[i].indexOf('Return Msg: ') > -1) {
+                                var rtn_msg = lines[i].split('Msg:')[1].trim();
+                                if (rtn_msg !== '') {
+                                    setAction = rtn_msg;
+                                }
                             }
                         }
+                            speechOutput = setAction;
+                    } else {
+                        speechOutput = "Got it, working on the command, "+setAction;
                     }
-                        speechOutput = setAction;
-                } else {
-                    speechOutput = "Got it, working on the command, "+setAction;
                 }
+            } else {
+                console.log('callEchoToEG - Error, EventGhost response code was ' + res.statusCode);
+                speechOutput = "Error, EventGhost response code was " + res.statusCode;
             }
-
             callback(sessionAttributes,
                 buildSpeechletResponse(cardTitle, speechOutput, repromptText, shouldEndSession)); //Pass stingResult instead of speechOutput for debugging if needed
         });
