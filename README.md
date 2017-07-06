@@ -1,5 +1,5 @@
 ## EchoToEventGhost
-Thread: http://www.eventghost.net/forum/viewtopic.php?f=2&t=7429
+Support Thread: http://www.eventghost.net/forum/viewtopic.php?f=2&t=7429
 
 UPDATE VERSION v2.2 07/04/2014
 Changes:
@@ -51,7 +51,7 @@ Lambda functions for Alexa skills must be hosted in either the **US East (N. Vir
 8. Click in the empty box and select **Alexa Skills Kit**, then next.
 9. For the function name enter **EchoToEGv2**, the Description can be left blank, and for the runtime select **Node.js 6.10**
 10. Under the **Lambda function** code section leave as **Edit code inline** and then copy in my code.
-The code can be found under \EchoToEventGhost\AlexaSkillKit_Code\EchoToEGv2.js
+The code can be found under [\EchoToEventGhost\AlexaSkillKit_Code\EchoToEGv2.js](https://github.com/m19brandon/EchoToEventGhost/blob/master/AlexaSkillKit_Code/EchoToEGv2.js)
 You will need to edit some variables in the code.
     * Line 16: Is your EventGhost Webserver using http and https
     * Line 18: Enter your External IP
@@ -59,7 +59,7 @@ You will need to edit some variables in the code.
     * Lines 29 & 30 are your EventGhost Webserver user name and password
 11. Under the **Lambda function handler and role** section, leave **Handler** and **Role** as is and for **Existing role** select "lamba_basic_execution"
 12. Leave the other sections as is and click **Next** and then on the next page click **Create Function**
-13. Under **Actions** you can test your function by using the **Configure test event**, change the name of **Hello World** as needed and pasted the contents of \EchoToEventGhost\AlexaSkillKit_Code\EchoToEG_TestEvent.xml (Line 22 is the command that is passed) and then **Save and Test**
+13. Under **Actions** you can test your function by using the **Configure test event**, change the name of **Hello World** as needed and pasted the contents of [\EchoToEventGhost\AlexaSkillKit_Code\EchoToEG_TestEvent.xml](https://github.com/m19brandon/EchoToEventGhost/blob/master/AlexaSkillKit_Code/EchoToEG_TestEvent.xml) (Line 22 is the command that is passed) and then **Save and Test**
 If all works you could see an event in your EventGhost log.
 
 
@@ -85,8 +85,8 @@ arn:aws:lambda:us-east-1:#:function:EchoToEGv2
 
 ## Step 3 (EventGhost, add some code to make stuff happen)
 
-1. Create a new Python Script Macro, copy in the contents of \EchoToEventGhost\EventGhost_Code\PythonScriptExample.py
-2. Copy \EchoToEventGhost\EventGhost_Code\index.html into your webserver folder
+1. Create a new Python Script Macro, copy in the contents of [\EchoToEventGhost\EventGhost_Code\PythonScriptExample.py](https://github.com/m19brandon/EchoToEventGhost/blob/master/EventGhost_Code/PythonScriptExample.py)
+2. Copy [\EchoToEventGhost\EventGhost_Code\index.html](https://github.com/m19brandon/EchoToEventGhost/blob/master/EventGhost_Code/index.html) into your webserver folder
 3. Drag the HTTP.EchoToEG event into that macro to fire.
 3. Test your Skill
 ************
