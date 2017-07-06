@@ -72,12 +72,13 @@ If all works you could see an event in your EventGhost log.
 5. Name your skill. This is the name displayed to users in the Alexa app. **Event Ghost** is a good choice.
 6. Create an invocation name. This is the word or phrase that users will speak to activate the skill. **Event Ghost** is a good choice. Amazon recommends against signal word invocation name. Click **Save**.
 7. Choose **Next** to continue to development of the new skill.
-8. In the **Intent Schema** box, paste the JSON code from \EchoToEventGhost\AlexaSkillKit_Code\IntentSchema.txt
+8. In the **Intent Schema** box, paste the JSON code from [\EchoToEventGhost\AlexaSkillKit_Code\IntentSchema.txt](https://github.com/m19brandon/EchoToEventGhost/blob/master/AlexaSkillKit_Code/IntentSchema.txt)
 9. Skip over the **Custom Slot Types** section.
 10. Under **Sample Utterances** paste in contents of \EchoToEventGhost\AlexaSkillKit_Code\Utterances.txt
 11. Choose **Next** and wait until the interaction model finishes loading, in no more than a few seconds
 12. Select the Endpoint AWS Lambda ARN then paste your ARN code. Select North America as your region, and for Account Linking select No, then choose Next.
-This code can be found under the Lambda function create in steps 1.
+
+    * This code can be found under the Lambda function create in steps 1.
 arn:aws:lambda:us-east-1:#:function:EchoToEGv2
 13. There is a new testing tool under the testing tab. Logs can be found here https://console.aws.amazon.com/cloudwatch
 14. There is no need to Publish the skill.
