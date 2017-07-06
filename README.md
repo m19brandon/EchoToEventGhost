@@ -80,14 +80,14 @@ If all works you could see an event in your EventGhost log.
 
     * This code can be found under the Lambda function create in steps 1.
 arn:aws:lambda:us-east-1:#:function:EchoToEGv2
-13. There is a new testing tool under the testing tab. Logs can be found here https://console.aws.amazon.com/cloudwatch
+13. There is a new **testing tool under the testing tab**. Logs can be found here https://console.aws.amazon.com/cloudwatch
 14. There is no need to Publish the skill.
 
 ## Step 3 (EventGhost, add some code to make stuff happen)
 
 1. Create a new Python Script Macro, copy in the contents of [\EchoToEventGhost\EventGhost_Code\PythonScriptExample.py](https://github.com/m19brandon/EchoToEventGhost/blob/master/EventGhost_Code/PythonScriptExample.py)
 2. Copy [\EchoToEventGhost\EventGhost_Code\index.html](https://github.com/m19brandon/EchoToEventGhost/blob/master/EventGhost_Code/index.html) into your webserver folder
-3. Drag the HTTP.EchoToEG event into that macro to fire.
+3. From your EventGhost log, drag the HTTP.EchoToEG event into that macro to fire whne you did your testing in step 1 & 2.
 3. Test your Skill
 ************
 Examples:
