@@ -79,7 +79,7 @@ exports.handler = function (event, context) {
         try {
             personId = '';
             if( typeof event.context.System.person.personId !== 'undefined' ) {
-                deviceId = event.context.System.person.personId;
+                personId = event.context.System.person.personId;
                 console.log('personId='+personId);
             } else {
                 console.log('personId not found');
