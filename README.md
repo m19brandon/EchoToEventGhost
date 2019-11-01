@@ -1,6 +1,13 @@
 ## EchoToEventGhost
 Support Thread: http://www.eventghost.net/forum/viewtopic.php?f=2&t=7429
 
+UPDATE VERSION v2.3 11/01/2019
+Changes:
+
+1. The post to EG now has 5 objects in the payload('spoken string', deviceId, sessionId, requestId, personId)
+2. Corrected issue where deviceId would not be initialized if not returned in subsequent calls
+   Note*  ("Skills Personalization" must be enabled in the Alexa Developer Console for the Alexa Skill / Permissions settings in order             for personId to be returned)
+
 UPDATE VERSION v2.2 07/04/2014
 Changes:
 

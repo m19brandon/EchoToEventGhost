@@ -1,9 +1,8 @@
 /**
  * EchoToEG - A custom Amazon Alexa Skill Kit that can send any spoken command to EventGhost
- * v2.2(20170704)
- * 1. Added a Welcome post to EG (allows for a custom responses, I'm suggesting an event bases on the time and past event history)
- * 2. The post to EG now has 4 objects in the payload('spoken string', deviceid, sessionid, requestId)
- * 3. Rewrote some of the code, it should look much cleaner
+ * v2.3(20191101)
+ * 1. The post to EG now has 5 objects in the payload('spoken string', deviceId, sessionId, requestId, personId)
+ * 2. Fixed issue with deviceId not being initialized properly
  * 
  * Brandon Simonsen (m19brandon.shop@gmail.com)
  * https://github.com/m19brandon/EchoToEventGhost
@@ -35,6 +34,7 @@ var EG_password = '';
 //var Alexa_Skill_ID = 'amzn1.ask.skill.#';
 
 var deviceId = '';
+var personId = '';
 
 
 // --------------- Main handler -----------------------
@@ -62,6 +62,7 @@ exports.handler = function (event, context) {
 
         // get the deviceId if present
         try {
+            deviceId = '';
             if( typeof event.context.System.device.deviceId !== 'undefined' ) {
                 deviceId = event.context.System.device.deviceId;
                 console.log('deviceId='+deviceId);
@@ -71,6 +72,20 @@ exports.handler = function (event, context) {
         } 
         catch (err) {
             console.log('deviceId not found');
+        }
+        
+        // get the personId if present
+        try {
+            personId = '';
+            if( typeof event.context.System.person.personId !== 'undefined' ) {
+                personId = event.context.System.person.personId;
+                console.log('personId='+personId);
+            } else {
+                console.log('personId not found');
+            }
+        } 
+        catch (err) {
+            console.log('personId not found');
         }
 
         if (event.session.new) {
@@ -231,7 +246,7 @@ function callEchoToEG(intent,requestId,session,callback)
 
 
 // Options included where we should send the request to with or without basic auth
-    EG_uri = '/index.html?' + EG_Event + '&' + setActionURI + '&' + deviceId + '&' + session.sessionId + '&' + requestId;
+    EG_uri = '/index.html?' + EG_Event + '&' + setActionURI + '&' + deviceId + '&' + session.sessionId + '&' + requestId + '&' + personId;
     
     
     sendToEG(EG_uri,function(body) {
@@ -293,7 +308,7 @@ function getWelcomeResponse(requestId,session,callback)
      * information above.
      */
     if( typeof EG_Event_Welcome !== 'undefined' ) {
-        EG_uri = '/index.html?' + EG_Event_Welcome + '&&' + deviceId + '&' + session.sessionId + '&' + requestId;
+        EG_uri = '/index.html?' + EG_Event_Welcome + '&&' + deviceId + '&' + session.sessionId + '&' + requestId + '&' + personId;
         sendToEG(EG_uri,function(body) {
             var egw_results = body;
             if (egw_results != 'Error') {
