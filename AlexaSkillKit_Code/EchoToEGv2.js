@@ -1,9 +1,8 @@
 /**
  * EchoToEG - A custom Amazon Alexa Skill Kit that can send any spoken command to EventGhost
  * v2.3(20191101)
- * 1. Added a Welcome post to EG (allows for a custom responses, I'm suggesting an event bases on the time and past event history)
- * 2. The post to EG now has 5 objects in the payload('spoken string', deviceId, sessionId, requestId, personId)
- * 3. Rewrote some of the code, it should look much cleaner
+ * 1. The post to EG now has 5 objects in the payload('spoken string', deviceId, sessionId, requestId, personId)
+ * 2. Fixed issue with deviceId not being initialized properly
  * 
  * Brandon Simonsen (m19brandon.shop@gmail.com)
  * https://github.com/m19brandon/EchoToEventGhost
